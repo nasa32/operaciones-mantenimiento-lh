@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>OT Mantenimiento</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#06244A">
+  <link rel="apple-touch-icon" href="/lake-house-logo.jpg?v=4.0.9">
+</head>
+<body class="login-page">
+  <main class="login-card">
+    <div class="brand">
+      <img class="brand-logo" src="/lake-house-logo.jpg?v=4.0.9" alt="LAKE HOUSE Resort, Country Club & Spa">
+      <div>
+        <div class="eyebrow">OPERACIONES · MANTENIMIENTO</div>
+        <h1>Centro de operaciones</h1>
+        <p>Gestión técnica de órdenes de trabajo</p>
+      </div>
+    </div>
+    <form id="loginForm">
+      <label>Usuario
+        <select id="username" autocomplete="username" required>
+          <option value="">Selecciona tu cuenta…</option>
+          <option value="admin">Administrador</option>
+          <option value="tecnico01">Técnico 01</option>
+          <option value="tecnico02">Técnico 02</option>
+          <option value="tecnico03">Técnico 03</option>
+          <option value="tecnico04">Técnico 04</option>
+          <option value="tecnico05">Técnico 05</option>
+          <option value="tecnico06">Técnico 06</option>
+          <option value="tecnico07">Técnico 07</option>
+          <option value="tecnico08">Técnico 08</option>
+          <option value="tecnico09">Técnico 09</option>
+          <option value="tecnico10">Técnico 10</option>
+        </select>
+      </label>
+      <p class="login-hint">Selecciona la cuenta que te fue asignada.</p>
+      <label>Contraseña
+        <input id="password" type="password" autocomplete="current-password" required>
+      </label>
+      <button class="primary" type="submit">Ingresar</button>
+      <button id="installAppBtn" class="secondary install-btn" type="button" onclick="installOTApp()" hidden>📲 Instalar en el celular</button>
+      <p id="loginMsg" class="message" role="alert"></p>
+      <p class="login-foot"><span class="live-dot"></span> Plataforma de mantenimiento · Acceso controlado</p>
+    </form>
+  </main>
+  <script src="/app.js"></script>
+<script src="/pwa.js"></script>
+</body>
+</html>

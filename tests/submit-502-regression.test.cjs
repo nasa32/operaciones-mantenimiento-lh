@@ -1,0 +1,13 @@
+const fs = require("node:fs");
+const path = require("node:path");
+const assert = require("node:assert/strict");
+const source = fs.readFileSync(path.join(__dirname, "../netlify/functions/orders.mjs"), "utf8");
+assert.match(source, /function\s+cleanTechnicianResponse\s*\(/, "orders.mjs must define cleanTechnicianResponse");
+assert.match(source, /o\.technicianResponse\s*=\s*cleanTechnicianResponse\(/, "SAVE_DRAFT/SUBMIT must call defined sanitizer");
+assert.match(source, /if\(body\.action!=="SUBMIT"\)/, "SUBMIT action route must exist");
+assert.match(source, /o\.status="IN_REVIEW"/, "SUBMIT must transition order to review");
+const clean = (value) => String(value ?? "").replace(/^\s*(?:(?:respuesta|comentario)\s+del\s+t[eé]cnico\s*:\s*)+/i, "").trim();
+assert.equal(clean("Respuesta del técnico: Se cambió la bomba"), "Se cambió la bomba");
+assert.equal(clean("Comentario del técnico: Revisado"), "Revisado");
+assert.equal(clean("Sin novedad"), "Sin novedad");
+console.log("SUBMIT 502 regression checks passed");

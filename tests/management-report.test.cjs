@@ -1,0 +1,15 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const assert = require('node:assert/strict');
+const root = path.resolve(__dirname, '..');
+const exportCode = fs.readFileSync(path.join(root, 'netlify/functions/export.mjs'), 'utf8');
+const techJs = fs.readFileSync(path.join(root, 'public/tecnico.js'), 'utf8');
+const report = exportCode.slice(exportCode.indexOf('async function buildManagementPdf('), exportCode.indexOf('function workbookFor('));
+for (const field of ['EQUIPO INTERVENIDO','ÁREA','TÉCNICO','FECHA DE INTERVENCIÓN','ESTADO DEL EQUIPO','OPERATIONAL','OUT_OF_SERVICE','INSPECTION']) assert.ok(report.includes(field), 'Missing report field/state: '+field);
+assert.doesNotMatch(report, /Checklist de mantenimiento|ACTIVIDAD \/ RESULTADO|Actividades realizadas:/);
+assert.ok(report.includes('BASADO EN CONDICIONES'), 'Condition-based maintenance label missing');
+assert.ok(report.includes('columns[7]'), 'Photos must remain in the last report column');
+assert.ok(report.includes("const stages=[['BEFORE','ANTES'],['DURING','DURANTE'],['AFTER','DESPUÉS']]"), 'Report must render BEFORE, DURING and AFTER');
+assert.ok(report.includes('thumbW=(cellW-gap*2)/3'), 'Three photos must fit on one horizontal row');
+assert.match(techJs, /Tipo de mantenimiento:<\/strong> \$\{esc\(o\.type\|\|o\.maintenanceType\|\|o\.maintenance_type/);
+console.log('Management report contract passed: maintenance type mapping and three horizontal evidence photos.');

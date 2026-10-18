@@ -1,0 +1,21 @@
+{
+  "name": "ot-mantenimiento-netlify",
+  "version": "4.3.9",
+  "private": true,
+  "description": "OT Mantenimiento OPS: dashboard ejecutivo Excel con gráficos nativos y expediente PDF",
+  "dependencies": {
+    "@netlify/blobs": "^10.0.0",
+    "pdf-lib": "^1.17.1",
+    "xlsx": "^0.18.5",
+    "xlsx-js-style": "^1.2.0",
+    "jszip": "^3.10.1"
+  },
+  "scripts": {
+    "test:pdf": "node tests/pdf-activities.test.cjs",
+    "test:images": "node tests/image-format.test.cjs",
+    "test:management-report": "node tests/management-report.test.cjs",
+    "test:submit-502": "node tests/submit-502-regression.test.cjs",
+    "test:maintenance-type": "node tests/technician-maintenance-type.test.cjs",
+    "test:general-workflow": "node tests/general-workflow.test.cjs"
+  }
+}
